@@ -1,0 +1,7 @@
+{% extends "layout.html.jinja" %}
+{% block content %}
+    <p>Dla produktu o identyfikatorze {{product_id}} dostępnych jest {{stats['reviews_count']}} opinii.
+    Dla {{stats['pros_count']}} opinii autorzy podali listę zalet, a dla {{stats['cons_count']}} listę wad.
+    Średnia ocena produktu to {{stats['product_rating']}}.<p>
+    <img src="/static/plots/{{product_id}}_recommendation.png" class="img-fluid">
+{% endblock %}
