@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
+import markdown as md
 
 def get_item(ancestor, selector, attribute=None, return_list=False):
     try:
@@ -33,7 +34,13 @@ selectors = {
 
 @app.route('/')
 def index():
-    return render_template("index.html.jinja")
+    if os.path.isfile('README.md'):
+        with open('README.md') as md_file:
+            md_to_html = md.markdown(md_file.read(), extensions=['tables', 'markdown.extensions.fenced_code'])
+    else:
+        md_to_html = None
+
+    return render_template('index.html.jinja', md=md_to_html)
 
 @app.route('/extract', methods=["POST", "GET"])
 def extract():
