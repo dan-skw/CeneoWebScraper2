@@ -17,11 +17,13 @@
 
 
 ## Requirements and tech stack
-- Python
-- Flask
-- Bootstrap
-- BeautifulSoup
-- Markdown
+- Python - main programming language
+- Flask - web framework
+- Bootstrap - for styling
+- BeautifulSoup - scraping data
+- Matplotlib and pandas
+- Markdown - renderning on the main site
+- JQuery and Datatables - for dynamically rendered table of opinions
 
 ## Getting started
 
@@ -36,3 +38,6 @@ And run flask server
 `flask run`
 
 then open [http://localhost:5000/](http://localhost:5000/) in your browser
+
+## Etapy pracy nad projektem strukturalnym
+I couldn't resolve problem with polish special chars so still have to do it...

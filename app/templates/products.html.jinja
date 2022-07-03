@@ -1,5 +1,11 @@
 {% extends "base.html.jinja" %}
 {% block content %}
+    <style>
+        a, a:hover, a:focus, a:active {
+            text-decoration: none;
+            color: inherit;
+         }
+    </style>
     <ul class="list-group">
         {% for product in products %}
             <li class="list-group-item d-flex justify-content-between align-items-center">

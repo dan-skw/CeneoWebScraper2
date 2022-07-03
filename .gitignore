@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # project
-app/reviews/*.*
+app/opinions/*.*
 app/static/plots/*.*

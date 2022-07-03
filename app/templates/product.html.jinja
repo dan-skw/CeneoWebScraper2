@@ -1,4 +1,91 @@
 {% extends "base.html.jinja" %}
+{% block sidebar %}
+    <h2>{{product_id}}</h2>
+    <img src="/static/plots/{{product_id}}_recommendation.png" class="img-fluid">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+        <th scope="col">Ogólna ocena produktu</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+             <td>{{"Pozytywna 😀"  if stats['product_rating'] > 4.0  else "Neutralna 😐" if stats['product_rating'] in range(3,4) else "Negatywna 😠"}}</td>
+        </tr>
+    </tbody>
+    </table>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Ocenione przez
+            <span class="badge bg-primary">{{opinions|length}}</span> 
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Poleca 
+            <span class="badge bg-success">{{stats['pros_count']}}</span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            Liczba negatywnych opinii
+            <span class="badge bg-danger">{{stats['cons_count']}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Liczba neutralnych opinii
+            <span class="badge bg-secondary">{{ ((opinions|length)-(stats['cons_count'] + stats['pros_count']))|abs}}</span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            Średnia ocena
+            <span class="badge bg-info">{{stats['product_rating']}}</span>
+        </li>
+    </ul>
+{% endblock %}
 {% block content %}
-    <p>{{product_id}}</p>
-{% endblock content %}
+
+
+ <main>
+    <div class="container mt-5 mb-3">
+      <div class="row">
+
+        <table id="myTable" class="display nowrap" style="width:100%">
+          <thead>
+            <tr>
+              <th>Autor</th>
+              <th>Rekomendacja</th>
+              <th>Wynik</th>
+              <th>Opinia</th>
+              <th>Data kupna</th>
+              <th>Data wystawienia</th>
+              <th>Zalety</th>
+              <th>Wady</th>
+ 
+            </tr>
+          </thead>
+          <tbody>
+            {% for opinion in opinions %}
+                <tr>
+                    <td> {{opinion[0]}} </td>
+                    <td> {{"Nie udzielono" if opinion[1] == None else opinion[1]}} </td>
+                    <td> {{opinion[2]}} </td>
+                    <td> {{opinion[3][0:30]+'...'}}</td>
+                    <td> {{opinion[7]}} </td>
+                    <td> {{opinion[6]}} </td>
+                    <td> {{opinion[4]}} </td>
+                    <td> {{opinion[5]}} </td>
+                </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+
+
+
+        </div>
+      </div>
+  </main>
+  <script type="text/javascript">
+   
+    $(document).ready(function () {
+      $('#myTable').DataTable();
+    });
+
+  </script>
+ 
+{% endblock %}
